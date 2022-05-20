@@ -1,45 +1,41 @@
 'use strict';
+const data = require('./data');
 const React = require('react');
 const {Box} = require('ink');
 const {Text} = require('ink');
-
 const TextInput = require("ink-text-input").default;
 
 
 const App = () => {
-	const [address, search] = React.useState("");
-	const [results , SetResult] = React.useState("results")
+	const [address, Search] = React.useState("");
+	const [results , SetResult] = React.useState([])
+
+	const addressData =  data.addresses
 
 	React.useEffect(() => {
-		const data = {
-			addresses: {
-				"0x1001": "Monero standard address",
-				"0x1002": "Monero sub address",
-				"0x1003": "Bitcoin address",
-				"0x1004": "Ethereum address"
-			}
-		}
+		getData()
 
-		const addressData =  Object.values(data.addresses).join(',')
-		const dataArray = addressData.split(",")
+	});
+
+	const getData = () => {
 		if(address && address.length > 3) {
-			for (let value of dataArray) {
-				// console.log(value)
-				if (value.includes(address)) {
-					console.log("true")
-					SetResult(value)
+			//const items =dataArray.filter(d => d.includes(address))
+			for(const item in addressData){
+				if(addressData[item].includes(address)){
+					let searchedResults = item + ":"+ addressData[item]
+					SetResult(searchedResults)
 				}
 			}
 		}
+	}
 
-	});
 
 	return (
 		<Box flexDirection="column">
 			<TextInput
 				placeholder="Enter address to search..."
 				value={address}
-				onChange={search}
+				onChange={Search}
 			/>
 			<Text paddingTop={5}>
 				Addressed searched for : {results}
