@@ -8,15 +8,7 @@ const meow = require('meow');
 const ui = importJsx('./ui');
 
 const cli = meow(`
-	Usage
-	  $ app-challenge
 
-	Options
-		--name  Your name
-
-	Examples
-	  $ app-challenge --name=Jane
-	  Hello, Jane
 `);
 
 render(React.createElement(ui, cli.flags));
