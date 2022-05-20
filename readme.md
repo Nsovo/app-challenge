@@ -5,7 +5,12 @@
 ## Install
 
 ```bash
-$ npm install --global app-challenge
+$ npm install
+```
+
+## Start app
+```bash
+$ node cli
 ```
 
 
